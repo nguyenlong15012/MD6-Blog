@@ -25,7 +25,6 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-@RequestMapping("/api/auth")
 @RestController
 @CrossOrigin(origins = "*")
 public class AuthController {
@@ -69,7 +68,7 @@ public class AuthController {
         });
         user.setRoles(roles);
         userService.save(user);
-        return new ResponseEntity<>(new ResponMessage("yes"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponMessage("Create Success!"), HttpStatus.OK);
     }
     @PostMapping("/signin")
     public ResponseEntity<?> login(@Valid @RequestBody SignInForm signInForm){

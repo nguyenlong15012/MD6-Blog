@@ -22,7 +22,7 @@ public class UserPrinciple implements UserDetails {
     private Collection<? extends GrantedAuthority> roles;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     public UserPrinciple() {
