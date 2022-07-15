@@ -51,14 +51,6 @@ public class UserPrinciple implements UserDetails {
         );
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -71,32 +63,9 @@ public class UserPrinciple implements UserDetails {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     public Collection<? extends GrantedAuthority> getRoles() {
         return roles;
-    }
-
-    public void setRoles(Collection<? extends GrantedAuthority> roles) {
-        this.roles = roles;
     }
 
     @Override
