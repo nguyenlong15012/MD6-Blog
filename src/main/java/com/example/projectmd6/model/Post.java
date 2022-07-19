@@ -12,30 +12,88 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPost;
+
+    private String title;
 
     private Date createAt;
 
     private int status;
 
+    private String description;
+
     private String content;
 
-    private String detail;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
     @ManyToOne
     @JoinColumn(name = "userId")
     private Users user;
 
-    private Long likes;
+    public Post(Long idPost, String title, Date createAt, int status, String description, String content, Users user) {
+        this.idPost = idPost;
+        this.title = title;
+        this.createAt = createAt;
+        this.status = status;
+        this.description = description;
+        this.content = content;
+        this.user = user;
+    }
 
-    @OneToMany(mappedBy = "postId", fetch = FetchType.EAGER)
-    private List<Image> imgs = new ArrayList<>();
+    public Post() {
+    }
 
-    @OneToMany(targetEntity = Comment.class)
-    private List<Comment> listComment;
+    public Long getIdPost() {
+        return idPost;
+    }
 
-    private String description;
+    public void setIdPost(Long idPost) {
+        this.idPost = idPost;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 }

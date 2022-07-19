@@ -1,22 +1,23 @@
 package com.example.projectmd6.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Data
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idComment;
 
     private String content;
-
-    private Date createAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }
