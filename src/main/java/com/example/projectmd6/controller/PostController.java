@@ -32,7 +32,7 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updateProduct(@PathVariable Long id, @RequestBody Post post) {
+    public ResponseEntity<Post> update(@PathVariable Long id, @RequestBody Post post) {
         Optional<Post> postOptional = postService.findById(id);
         if (!postOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -43,12 +43,20 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Post> deleteProduct(@PathVariable Long id) {
-        Optional<Post> studentOptional = postService.findById(id);
-        if (!studentOptional.isPresent()) {
+    public ResponseEntity<Post> delete(@PathVariable Long id) {
+        Optional<Post> postOptional = postService.findById(id);
+        if (!postOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         postService.remove(id);
-        return new ResponseEntity<>(studentOptional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> findById(@PathVariable Long id) {
+        Optional<Post> postOptional = postService.findById(id);
+        if (!postOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
     }
 }

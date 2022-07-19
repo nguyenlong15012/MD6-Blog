@@ -2,7 +2,6 @@ package com.example.projectmd6.model;
 
 
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Table(name = "comment")
