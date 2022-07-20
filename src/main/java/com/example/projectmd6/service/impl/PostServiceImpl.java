@@ -7,6 +7,7 @@ import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
 public class PostServiceImpl implements IPostService {
@@ -36,5 +37,15 @@ public class PostServiceImpl implements IPostService {
     @Override
     public Iterable<Post> findAllByUser(Users users) {
         return postRepository.findAllByUser(users);
+    }
+
+    @Override
+    public List<Post> findPostsByTitleContaining(String title) {
+        return postRepository.findPostsByTitleContaining(title);
+    }
+
+    @Override
+    public List<Post> findByTag_Name(String tagName) {
+        return postRepository.findByTag_Name(tagName);
     }
 }

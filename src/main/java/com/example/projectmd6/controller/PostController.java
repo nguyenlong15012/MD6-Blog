@@ -59,4 +59,22 @@ public class PostController {
         }
         return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
     }
+
+    @GetMapping("find-by-title/{title}")
+    public ResponseEntity<Iterable<Post>> findByTitle(@PathVariable String title) {
+        List<Post> posts = postService.findPostsByTitleContaining(title);
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
+    @GetMapping("find-by-tag/{tagName}")
+    public ResponseEntity<Iterable<Post>> findByTag(@PathVariable String tagName) {
+        List<Post> posts = postService.findByTag_Name(tagName);
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
 }

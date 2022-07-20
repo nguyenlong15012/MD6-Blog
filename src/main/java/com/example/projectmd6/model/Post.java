@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "post")
@@ -27,6 +28,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "userId")
     private Users user;
+
+    @ManyToMany
+    private Set<Tag> tag;
 
     public Post(Long idPost, String title, Date createAt, int status, String description, String content, Users user) {
         this.idPost = idPost;
@@ -95,5 +99,13 @@ public class Post {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public Set<Tag> getTag() {
+        return tag;
+    }
+
+    public void setTag(Set<Tag> tag) {
+        this.tag = tag;
     }
 }

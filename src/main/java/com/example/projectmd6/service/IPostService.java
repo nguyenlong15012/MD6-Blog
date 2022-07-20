@@ -3,6 +3,7 @@ package com.example.projectmd6.service;
 import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Users;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IPostService {
@@ -15,4 +16,8 @@ public interface IPostService {
     void remove(Long id);
 
     Iterable<Post> findAllByUser(Users users);
+
+    List<Post> findPostsByTitleContaining(String title);
+
+    List<Post> findByTag_Name(String tagName);
 }
