@@ -1,6 +1,7 @@
 package com.example.projectmd6.service;
 
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.model.Users;
 
 import java.util.Optional;
 

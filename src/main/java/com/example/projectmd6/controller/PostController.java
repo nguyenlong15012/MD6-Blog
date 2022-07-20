@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class PostController {
     }
     @PostMapping("")
     public ResponseEntity<Post> add(@RequestBody Post post) {
+        post.setCreateAt(Date.valueOf(java.time.LocalDate.now() + ""));
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.OK);
     }
