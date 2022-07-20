@@ -1,6 +1,7 @@
 package com.example.projectmd6.service.impl;
 
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.model.Users;
 import com.example.projectmd6.repository.IPostRepository;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class PostServiceImpl implements IPostService {
     @Override
     public void remove(Long id) {
         postRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Post> findAllByUser(Users users) {
+        return postRepository.findAllByUser(users);
     }
 }

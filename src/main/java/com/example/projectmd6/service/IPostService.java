@@ -1,6 +1,7 @@
 package com.example.projectmd6.service;
 
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.model.Users;
 
 import java.util.Optional;
 
@@ -12,4 +13,6 @@ public interface IPostService {
     void save(Post post);
 
     void remove(Long id);
+
+    Iterable<Post> findAllByUser(Users users);
 }
