@@ -80,6 +80,6 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.createToken(authentication);
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getName(), userPrinciple.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getName(), userPrinciple.getId(), userPrinciple.getAuthorities()));
     }
 }
