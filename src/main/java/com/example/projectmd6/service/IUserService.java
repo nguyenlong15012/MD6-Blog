@@ -1,5 +1,6 @@
 package com.example.projectmd6.service;
 
+import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Users;
 
 import java.util.Optional;
@@ -10,4 +11,5 @@ public interface IUserService {
     Boolean existsByEmail(String email);
     Users save(Users users);
     Optional<Users> findById(Long id);
+    Iterable<Users> findAll();
 }

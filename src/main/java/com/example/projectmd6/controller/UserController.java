@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,5 +28,13 @@ public class UserController {
         Optional<Users> usersOptional = userService.findById(idUser);
         Iterable<Post> posts = postService.findAllByUser(usersOptional.get());
         return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<Iterable<Users>> findAll() {
+        List<Users> users = (List<Users>) userService.findAll();
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

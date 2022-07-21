@@ -36,4 +36,9 @@ public class UserServiceImpl implements IUserService {
     public Optional<Users> findById(Long id) {
         return userRepository.findById(id);
     }
+
+    @Override
+    public Iterable<Users> findAll() {
+        return userRepository.findAll();
+    }
 }
