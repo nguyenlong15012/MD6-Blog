@@ -8,6 +8,7 @@ import com.example.projectmd6.model.Role;
 import com.example.projectmd6.model.RoleName;
 import com.example.projectmd6.model.Users;
 import com.example.projectmd6.security.jwt.JwtProvider;
+import com.example.projectmd6.security.jwt.JwtTokenFilter;
 import com.example.projectmd6.security.userprincal.UserPrinciple;
 import com.example.projectmd6.service.impl.RoleServiceIpml;
 import com.example.projectmd6.service.impl.UserServiceImpl;
@@ -18,9 +19,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,6 +41,8 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     @Autowired
     JwtProvider jwtProvider;
+    @Autowired
+    JwtTokenFilter jwtTokenFilter;
     @PostMapping("/signup")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpForm signUpForm){
         if(userService.existsByUsername(signUpForm.getUsername())){
@@ -80,6 +85,26 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.createToken(authentication);
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getName(), userPrinciple.getId(), userPrinciple.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getName(), userPrinciple.getId(),userPrinciple.getAvatar(), userPrinciple.getAuthorities()));
     }
+
+//    @PutMapping("/change-avatar")
+//    public ResponseEntity<?> changeAvatar(HttpServletRequest request, @Valid @RequestBody ChangeAvatar changeAvatar){
+//        String jwt = jwtTokenFilter.getJwt(request);
+//        String username = jwtProvider.getUerNameFromToken(jwt);
+//        Users user;
+//        try {
+//            if (changeAvatar.getAvatar()==null){
+//                return new ResponseEntity<>(new ResponMessage("no"), HttpStatus.OK);
+//            }else {
+//                user = userService.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("USer not found -> username " + username ));
+//                user.setAvatar(changeAvatar.getAvatar());
+//                userService.save(user);
+//            }
+//            return new ResponseEntity<>(new ResponMessage("yes"), HttpStatus.OK);
+//        }catch (UsernameNotFoundException exception){
+//            return new ResponseEntity<>(new ResponMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+//        }
+//
+//    }
 }
