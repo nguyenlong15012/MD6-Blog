@@ -13,4 +13,6 @@ public interface IPostService {
     void save(Post post);
 
     void remove(Long id);
+
+    Iterable<Post> findAllByUser(Users users);
 }

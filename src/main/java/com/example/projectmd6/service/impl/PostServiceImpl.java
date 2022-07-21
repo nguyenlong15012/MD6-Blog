@@ -32,4 +32,9 @@ public class PostServiceImpl implements IPostService {
     public void remove(Long id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<Post> findAllByUser(Users users) {
+        return postRepository.findAllByUser(users);
+    }
 }

@@ -31,4 +31,14 @@ public class UserServiceImpl implements IUserService {
     public Users save(Users users) {
         return userRepository.save(users);
     }
+
+    @Override
+    public Optional<Users> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Users> findAll() {
+        return userRepository.findAll();
+    }
 }
