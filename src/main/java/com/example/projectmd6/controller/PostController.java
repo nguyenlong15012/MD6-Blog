@@ -71,4 +71,24 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+//    @GetMapping("find-by-tag/{tagName}")
+//    public ResponseEntity<Iterable<Post>> findByTag(@PathVariable String tagName) {
+//        List<Post> posts = postService.findByTag_Name(tagName);
+//        if (posts.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(posts, HttpStatus.OK);
+//    }
+
+    //danh sach cong ty khong khoa
+    @GetMapping("/unlock-post")
+    public ResponseEntity<Iterable<Post>> findAllUnlockPost() {
+        return new ResponseEntity<>(postService.findAllUnlockPost(), HttpStatus.OK);
+    }
+
+    //danh sach cong ty bi khoa
+    @GetMapping("/locked-post")
+    public ResponseEntity<Iterable<Post>> findAllLockPost() {
+        return new ResponseEntity<>(postService.findAllLockPost(), HttpStatus.OK);
+    }
 }

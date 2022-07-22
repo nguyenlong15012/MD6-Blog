@@ -1,15 +1,18 @@
 package com.example.projectmd6.controller;
 
+import com.example.projectmd6.dto.request.ChangeAvatar;
 import com.example.projectmd6.dto.request.SignInForm;
 import com.example.projectmd6.dto.request.SignUpForm;
 import com.example.projectmd6.dto.response.JwtResponse;
 import com.example.projectmd6.dto.response.ResponMessage;
+import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Role;
 import com.example.projectmd6.model.RoleName;
 import com.example.projectmd6.model.Users;
 import com.example.projectmd6.security.jwt.JwtProvider;
 import com.example.projectmd6.security.jwt.JwtTokenFilter;
 import com.example.projectmd6.security.userprincal.UserPrinciple;
+import com.example.projectmd6.service.IPostService;
 import com.example.projectmd6.service.impl.RoleServiceIpml;
 import com.example.projectmd6.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,23 +91,25 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token, userPrinciple.getName(), userPrinciple.getId(),userPrinciple.getAvatar(), userPrinciple.getAuthorities()));
     }
 
-//    @PutMapping("/change-avatar")
-//    public ResponseEntity<?> changeAvatar(HttpServletRequest request, @Valid @RequestBody ChangeAvatar changeAvatar){
-//        String jwt = jwtTokenFilter.getJwt(request);
-//        String username = jwtProvider.getUerNameFromToken(jwt);
-//        Users user;
-//        try {
-//            if (changeAvatar.getAvatar()==null){
-//                return new ResponseEntity<>(new ResponMessage("no"), HttpStatus.OK);
-//            }else {
-//                user = userService.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("USer not found -> username " + username ));
-//                user.setAvatar(changeAvatar.getAvatar());
-//                userService.save(user);
-//            }
-//            return new ResponseEntity<>(new ResponMessage("yes"), HttpStatus.OK);
-//        }catch (UsernameNotFoundException exception){
-//            return new ResponseEntity<>(new ResponMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
-//        }
-//
-//    }
+    @PutMapping("/change-avatar")
+    public ResponseEntity<?> changeAvatar(HttpServletRequest request, @Valid @RequestBody ChangeAvatar changeAvatar){
+        String jwt = jwtTokenFilter.getJwt(request);
+        String username = jwtProvider.getUserNameFromToken(jwt);
+        Users user;
+        try {
+            if (changeAvatar.getAvatar()==null){
+                return new ResponseEntity<>(new ResponMessage("no"), HttpStatus.OK);
+            }else {
+                user = userService.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("USer not found -> username " + username ));
+                user.setAvatar(changeAvatar.getAvatar());
+                userService.save(user);
+            }
+            return new ResponseEntity<>(new ResponMessage("yes"), HttpStatus.OK);
+        }catch (UsernameNotFoundException exception){
+            return new ResponseEntity<>(new ResponMessage(exception.getMessage()), HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 }

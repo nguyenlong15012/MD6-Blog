@@ -14,8 +14,16 @@ public interface IPostService {
     void save(Post post);
 
     void remove(Long id);
+
     Iterable<Post> findAllByUser(Users users);
 
     List<Post> findPostsByTitleContaining(String title);
 
+//    List<Post> findByTag_Name(String tagName);
+
+    //danh sach cong ty khong khoa
+    Iterable<Post> findAllUnlockPost();
+
+    //danh sach cong ty bi khoa
+    Iterable<Post> findAllLockPost();
 }
