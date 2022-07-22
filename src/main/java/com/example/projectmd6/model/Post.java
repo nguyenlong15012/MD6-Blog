@@ -21,6 +21,8 @@ public class Post {
 
     private int status;
 
+    private String tag;
+
     private String description;
 
     private String content;
@@ -29,14 +31,12 @@ public class Post {
     @JoinColumn(name = "userId")
     private Users user;
 
-    @ManyToMany
-    private Set<Tag> tag;
-
-    public Post(Long idPost, String title, Date createAt, int status, String description, String content, Users user) {
+    public Post(Long idPost, String title, Date createAt, int status, String tag, String description, String content, Users user) {
         this.idPost = idPost;
         this.title = title;
         this.createAt = createAt;
         this.status = status;
+        this.tag = tag;
         this.description = description;
         this.content = content;
         this.user = user;
@@ -101,11 +101,11 @@ public class Post {
         this.user = user;
     }
 
-    public Set<Tag> getTag() {
+    public String getTag() {
         return tag;
     }
 
-    public void setTag(Set<Tag> tag) {
+    public void setTag(String tag) {
         this.tag = tag;
     }
 }

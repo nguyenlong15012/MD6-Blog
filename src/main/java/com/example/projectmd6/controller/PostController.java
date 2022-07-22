@@ -71,12 +71,4 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("find-by-tag/{tagName}")
-    public ResponseEntity<Iterable<Post>> findByTag(@PathVariable String tagName) {
-        List<Post> posts = postService.findByTag_Name(tagName);
-        if (posts.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
 }

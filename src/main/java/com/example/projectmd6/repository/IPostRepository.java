@@ -13,5 +13,4 @@ public interface IPostRepository extends JpaRepository<Post,Long> {
 
     List<Post>findPostsByTitleContaining(String title);
 
-    List<Post> findByTag_Name(String tagName);
 }

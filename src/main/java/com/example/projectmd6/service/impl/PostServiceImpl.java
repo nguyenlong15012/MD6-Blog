@@ -44,8 +44,4 @@ public class PostServiceImpl implements IPostService {
         return postRepository.findPostsByTitleContaining(title);
     }
 
-    @Override
-    public List<Post> findByTag_Name(String tagName) {
-        return postRepository.findByTag_Name(tagName);
-    }
 }
