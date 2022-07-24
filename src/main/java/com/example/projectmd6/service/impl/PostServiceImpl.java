@@ -48,4 +48,9 @@ public class PostServiceImpl implements IPostService {
     public List<Post> findByTag_Name(String tagName) {
         return postRepository.findByTag_Name(tagName);
     }
+
+    @Override
+    public Iterable<Post> findAllByStatusPublic() {
+        return postRepository.findAllByStatusPublic();
+    }
 }

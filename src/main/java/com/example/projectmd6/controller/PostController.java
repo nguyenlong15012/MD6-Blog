@@ -27,6 +27,14 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
+    @GetMapping("/find-all-public-status")
+    public ResponseEntity<Iterable<Post>> findAllByStatusPublic() {
+        List<Post> posts = (List<Post>) postService.findAllByStatusPublic();
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
     @PostMapping("")
     public ResponseEntity<Post> add(@RequestBody Post post) {
         post.setCreateAt(Date.valueOf(java.time.LocalDate.now() + ""));
