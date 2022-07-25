@@ -2,6 +2,8 @@ package com.example.projectmd6.service;
 
 import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Users;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -23,4 +25,6 @@ public interface IPostService {
     List<Post> findByTag_Name(String tagName);
 
     Iterable<Post> findAllByStatusPublic();
+
+    Page<Post> findAll(Pageable pageable);
 }

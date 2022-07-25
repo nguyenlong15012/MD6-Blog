@@ -5,6 +5,8 @@ import com.example.projectmd6.model.Users;
 import com.example.projectmd6.repository.IPostRepository;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,5 +64,10 @@ public class PostServiceImpl implements IPostService {
     @Override
     public Iterable<Post> findAllByStatusPublic() {
         return postRepository.findAllByStatusPublic();
+    }
+
+    @Override
+    public Page<Post> findAll(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 }
