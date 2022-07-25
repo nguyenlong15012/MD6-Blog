@@ -88,15 +88,4 @@ public class PostController {
 //        return new ResponseEntity<>(posts, HttpStatus.OK);
 //    }
 
-    //danh sach cong ty khong khoa
-    @GetMapping("/unlock-post")
-    public ResponseEntity<Iterable<Post>> findAllUnlockPost() {
-        return new ResponseEntity<>(postService.findAllUnlockPost(), HttpStatus.OK);
-    }
-
-    //danh sach cong ty bi khoa
-    @GetMapping("/locked-post")
-    public ResponseEntity<Iterable<Post>> findAllLockPost() {
-        return new ResponseEntity<>(postService.findAllLockPost(), HttpStatus.OK);
-    }
 }

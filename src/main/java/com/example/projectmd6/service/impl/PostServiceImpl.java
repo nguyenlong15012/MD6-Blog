@@ -52,16 +52,6 @@ public class PostServiceImpl implements IPostService {
 //    }
 
     @Override
-    public Iterable<Post> findAllUnlockPost() {
-        return postRepository.findAllUnlockPost();
-    }
-
-    @Override
-    public Iterable<Post> findAllLockPost() {
-        return postRepository.findAllLockPost();
-    }
-
-    @Override
     public Iterable<Post> findAllByStatusPublic() {
         return postRepository.findAllByStatusPublic();
     }

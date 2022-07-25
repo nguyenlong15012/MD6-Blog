@@ -22,7 +22,7 @@ public interface IPostService {
 
     List<Post> findPostsByTitleContaining(String title);
 
-    List<Post> findByTag_Name(String tagName);
+//    List<Post> findByTag_Name(String tagName);
 
     Iterable<Post> findAllByStatusPublic();
 
