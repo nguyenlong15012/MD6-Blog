@@ -1,6 +1,8 @@
 package com.example.projectmd6.controller;
 
+import com.example.projectmd6.model.Comment;
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.service.ICommentService;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
