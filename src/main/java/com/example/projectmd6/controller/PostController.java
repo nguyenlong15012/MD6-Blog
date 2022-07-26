@@ -19,6 +19,7 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private IPostService postService;
+
     @GetMapping
     public ResponseEntity<Iterable<Post>> findAll() {
         List<Post> posts = (List<Post>) postService.findAll();
@@ -27,6 +28,7 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
+
     @GetMapping("/find-all-public-status")
     public ResponseEntity<Iterable<Post>> findAllByStatusPublic() {
         List<Post> posts = (List<Post>) postService.findAllByStatusPublic();
@@ -35,12 +37,14 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
+
     @PostMapping("")
     public ResponseEntity<Post> add(@RequestBody Post post) {
         post.setCreateAt(Date.valueOf(java.time.LocalDate.now() + ""));
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Post> update(@PathVariable Long id, @RequestBody Post post) {
         Optional<Post> postOptional = postService.findById(id);
@@ -61,6 +65,7 @@ public class PostController {
         postService.remove(id);
         return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable Long id) {
         Optional<Post> postOptional = postService.findById(id);
@@ -79,7 +84,7 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-//    @GetMapping("find-by-tag/{tagName}")
+    //    @GetMapping("find-by-tag/{tagName}")
 //    public ResponseEntity<Iterable<Post>> findByTag(@PathVariable String tagName) {
 //        List<Post> posts = postService.findByTag_Name(tagName);
 //        if (posts.isEmpty()) {
@@ -87,5 +92,9 @@ public class PostController {
 //        }
 //        return new ResponseEntity<>(posts, HttpStatus.OK);
 //    }
-
+    @GetMapping("/search")
+    public ResponseEntity<Iterable<Post>> findAllByTitleContaining(@RequestParam String title) {
+        Iterable<Post> posts = postService.findAllByTitleContaining(title);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
 }

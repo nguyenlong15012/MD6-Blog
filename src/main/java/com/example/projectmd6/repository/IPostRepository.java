@@ -21,4 +21,8 @@ public interface IPostRepository extends JpaRepository<Post,Long> {
     @Modifying
     @Query(value = "select * from post where status = 1;", nativeQuery = true)
     Iterable<Post> findAllByStatusPublic();
+
+    @Modifying
+    @Query(value = "select * from post where status = 1 and title like CONCAT('%',:title,'%');", nativeQuery = true)
+    Iterable<Post> findAllByTitleContaining(@Param("title") String title);
 }
