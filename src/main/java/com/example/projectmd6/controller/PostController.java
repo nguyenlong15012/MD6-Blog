@@ -1,6 +1,8 @@
 package com.example.projectmd6.controller;
 
+import com.example.projectmd6.model.Comment;
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.service.ICommentService;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,10 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private IPostService postService;
+
+    @Autowired
+    private ICommentService commentService;
+
     @GetMapping
     public ResponseEntity<Iterable<Post>> findAll() {
         List<Post> posts = (List<Post>) postService.findAll();
@@ -90,5 +96,16 @@ public class PostController {
     @GetMapping("/locked-post")
     public ResponseEntity<Iterable<Post>> findAllLockPost() {
         return new ResponseEntity<>(postService.findAllLockPost(), HttpStatus.OK);
+    }
+
+    // show comment theo bài post
+    @GetMapping("/view-comment/{idPost}")
+    public ResponseEntity findAllCommentByPost(@PathVariable Long idPost){
+        Optional<Post> postOptional = postService.findById(idPost);
+        if (!postOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Iterable<Comment> comments = commentService.findAllByPost(postOptional.get());
+        return new ResponseEntity<>(comments,HttpStatus.OK);
     }
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     private ICommentService commentService;
