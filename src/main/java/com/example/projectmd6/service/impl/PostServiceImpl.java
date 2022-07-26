@@ -60,4 +60,9 @@ public class PostServiceImpl implements IPostService {
     public Page<Post> findAll(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
+
+    @Override
+    public Iterable<Post> findAllByTitleContaining(String title) {
+        return postRepository.findAllByTitleContaining(title);
+    }
 }

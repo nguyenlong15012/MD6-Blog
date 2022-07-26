@@ -104,4 +104,9 @@ public class PostController {
         Iterable<Comment> comments = commentService.findAllByPost(postOptional.get());
         return new ResponseEntity<>(comments,HttpStatus.OK);
     }
+    @GetMapping("/search")
+    public ResponseEntity<Iterable<Post>> findAllByTitleContaining(@RequestParam String title) {
+        Iterable<Post> posts = postService.findAllByTitleContaining(title);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
 }
