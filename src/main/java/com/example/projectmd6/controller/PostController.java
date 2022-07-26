@@ -19,6 +19,10 @@ import java.util.Optional;
 public class PostController {
     @Autowired
     private IPostService postService;
+
+    @Autowired
+    private ICommentService commentService;
+
     @GetMapping
     public ResponseEntity<Iterable<Post>> findAll() {
         List<Post> posts = (List<Post>) postService.findAll();
@@ -88,4 +92,14 @@ public class PostController {
 //        return new ResponseEntity<>(posts, HttpStatus.OK);
 //    }
 
+    // show comment theo bài post
+    @GetMapping("/view-comment/{idPost}")
+    public ResponseEntity findAllCommentByPost(@PathVariable Long idPost){
+        Optional<Post> postOptional = postService.findById(idPost);
+        if (!postOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Iterable<Comment> comments = commentService.findAllByPost(postOptional.get());
+        return new ResponseEntity<>(comments,HttpStatus.OK);
+    }
 }
