@@ -5,6 +5,10 @@ import com.example.projectmd6.model.Post;
 import com.example.projectmd6.service.ICommentService;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,13 +29,21 @@ public class PostController {
     @Autowired
     private ICommentService commentService;
 
+//    @GetMapping
+//    public ResponseEntity<Iterable<Post>> findAll() {
+//        List<Post> posts = (List<Post>) postService.findAll();
+//        if (posts.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<>(posts, HttpStatus.OK);
+//    }
     @GetMapping
-    public ResponseEntity<Iterable<Post>> findAll() {
-        List<Post> posts = (List<Post>) postService.findAll();
-        if (posts.isEmpty()) {
+    public ResponseEntity<?> findAll(@PageableDefault(sort = "id_post", direction = Sort.Direction.DESC) Pageable pageable){
+        Page<Post> postsPage = postService.findAll(pageable);
+        if(postsPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(posts, HttpStatus.OK);
+        return new ResponseEntity<>(postsPage, HttpStatus.OK);
     }
     @GetMapping("/find-all-public-status")
     public ResponseEntity<Iterable<Post>> findAllByStatusPublic() {

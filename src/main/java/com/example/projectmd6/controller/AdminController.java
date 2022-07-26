@@ -26,11 +26,11 @@ public class AdminController {
     private IUserService userService;
     @GetMapping
     public ResponseEntity<?> pagePost(@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
-        Page<Post> categoryPage = postService.findAll(pageable);
-        if(categoryPage.isEmpty()){
+        Page<Post> postPage = postService.findAll(pageable);
+        if(postPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(categoryPage, HttpStatus.OK);
+        return new ResponseEntity<>(postPage, HttpStatus.OK);
     }
 
 //    public ResponseEntity<?> pagePót(@PageableDefault(sort = "nameCategory", direction = Sort.Direction.ASC) Pageable pageable){
