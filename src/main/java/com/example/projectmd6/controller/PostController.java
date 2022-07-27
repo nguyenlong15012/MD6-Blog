@@ -1,6 +1,8 @@
 package com.example.projectmd6.controller;
 
+import com.example.projectmd6.model.Comment;
 import com.example.projectmd6.model.Post;
+import com.example.projectmd6.service.ICommentService;
 import com.example.projectmd6.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,9 @@ public class PostController {
     @Autowired
     private IPostService postService;
 
+    @Autowired
+    private ICommentService commentService;
+
     @GetMapping
     public ResponseEntity<Iterable<Post>> findAll() {
         List<Post> posts = (List<Post>) postService.findAll();
@@ -28,7 +33,6 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
-
     @GetMapping("/find-all-public-status")
     public ResponseEntity<Iterable<Post>> findAllByStatusPublic() {
         List<Post> posts = (List<Post>) postService.findAllByStatusPublic();
@@ -37,14 +41,12 @@ public class PostController {
         }
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
-
     @PostMapping("")
     public ResponseEntity<Post> add(@RequestBody Post post) {
         post.setCreateAt(Date.valueOf(java.time.LocalDate.now() + ""));
         postService.save(post);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<Post> update(@PathVariable Long id, @RequestBody Post post) {
         Optional<Post> postOptional = postService.findById(id);
@@ -65,7 +67,6 @@ public class PostController {
         postService.remove(id);
         return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Post> findById(@PathVariable Long id) {
         Optional<Post> postOptional = postService.findById(id);
@@ -84,7 +85,7 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    //    @GetMapping("find-by-tag/{tagName}")
+//    @GetMapping("find-by-tag/{tagName}")
 //    public ResponseEntity<Iterable<Post>> findByTag(@PathVariable String tagName) {
 //        List<Post> posts = postService.findByTag_Name(tagName);
 //        if (posts.isEmpty()) {
@@ -92,6 +93,17 @@ public class PostController {
 //        }
 //        return new ResponseEntity<>(posts, HttpStatus.OK);
 //    }
+
+    // show comment theo bài post
+    @GetMapping("/view-comment/{idPost}")
+    public ResponseEntity findAllCommentByPost(@PathVariable Long idPost){
+        Optional<Post> postOptional = postService.findById(idPost);
+        if (!postOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Iterable<Comment> comments = commentService.findAllByPost(postOptional.get());
+        return new ResponseEntity<>(comments,HttpStatus.OK);
+    }
     @GetMapping("/search")
     public ResponseEntity<Iterable<Post>> findAllByTitleContaining(@RequestParam String title) {
         Iterable<Post> posts = postService.findAllByTitleContaining(title);

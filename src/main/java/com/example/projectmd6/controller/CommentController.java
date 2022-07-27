@@ -8,11 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/comment")
+@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     private ICommentService commentService;
@@ -25,6 +26,7 @@ public class CommentController {
 
     @PostMapping()
     public ResponseEntity<Comment> createCmt(@RequestBody Comment comment){
+        comment.setTime(new Date());
         commentService.save(comment);
         return new ResponseEntity<>(HttpStatus.OK);
     }
