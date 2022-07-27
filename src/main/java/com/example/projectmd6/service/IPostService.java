@@ -18,7 +18,7 @@ public interface IPostService {
 
     void remove(Long id);
 
-    Iterable<Post> findAllByUser(Users users);
+    Page<Post> findAllByUser(Users users, Pageable pageable);
 
     List<Post> findPostsByTitleContaining(String title);
 

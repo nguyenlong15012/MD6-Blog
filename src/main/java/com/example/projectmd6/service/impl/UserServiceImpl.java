@@ -1,9 +1,12 @@
 package com.example.projectmd6.service.impl;
 
+import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Users;
 import com.example.projectmd6.repository.IUserRepository;
 import com.example.projectmd6.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -38,7 +41,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Iterable<Users> findAll() {
-        return userRepository.findAll();
+    public Page<Users> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 }

@@ -37,8 +37,8 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public Iterable<Post> findAllByUser(Users users) {
-        return postRepository.findAllByUser(users);
+    public Page<Post> findAllByUser(Users users, Pageable pageable) {
+        return postRepository.findAllByUser(users, pageable);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class AdminController {
     @Autowired
     private IUserService userService;
     @GetMapping
-    public ResponseEntity<?> pagePost(@PageableDefault(direction = Sort.Direction.ASC) Pageable pageable){
+    public ResponseEntity<?> pagePost(@PageableDefault(direction = Sort.Direction.DESC) Pageable pageable){
         Page<Post> postPage = postService.findAll(pageable);
         if(postPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

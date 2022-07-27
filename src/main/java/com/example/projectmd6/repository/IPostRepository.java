@@ -2,6 +2,8 @@ package com.example.projectmd6.repository;
 
 import com.example.projectmd6.model.Post;
 import com.example.projectmd6.model.Users;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface IPostRepository extends JpaRepository<Post,Long> {
-    Iterable<Post> findAllByUser(Users users);
+    Page<Post> findAllByUser(Users users, Pageable pageable);
 
     List<Post>findPostsByTitleContaining(String title);
 
