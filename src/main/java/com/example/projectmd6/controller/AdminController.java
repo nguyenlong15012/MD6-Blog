@@ -33,7 +33,7 @@ public class AdminController {
         return new ResponseEntity<>(categoryPage, HttpStatus.OK);
     }
 
-//    public ResponseEntity<?> pagePót(@PageableDefault(sort = "nameCategory", direction = Sort.Direction.ASC) Pageable pageable){
+//    public ResponseEntity<?> pagePost(@PageableDefault(sort = "nameCategory", direction = Sort.Direction.ASC) Pageable pageable){
 //        Page<Post> categoryPage = postService.findAll(pageable);
 //        if(categoryPage.isEmpty()){
 //            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
