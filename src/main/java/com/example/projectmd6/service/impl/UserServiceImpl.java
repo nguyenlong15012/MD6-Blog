@@ -33,6 +33,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public void remove(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public Optional<Users> findById(Long id) {
         return userRepository.findById(id);
     }
@@ -41,4 +46,5 @@ public class UserServiceImpl implements IUserService {
     public Iterable<Users> findAll() {
         return userRepository.findAll();
     }
+
 }

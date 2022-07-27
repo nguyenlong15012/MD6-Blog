@@ -10,10 +10,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -32,6 +31,16 @@ public class AdminController {
         }
         return new ResponseEntity<>(categoryPage, HttpStatus.OK);
     }
+////    xóa bìa viết
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Post> delete(@PathVariable Long id) {
+//        Optional<Post> postOptional = postService.findById(id);
+//        if (!postOptional.isPresent()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        postService.remove(id);
+//        return new ResponseEntity<>(postOptional.get(), HttpStatus.OK);
+//    }
 
 //    public ResponseEntity<?> pagePót(@PageableDefault(sort = "nameCategory", direction = Sort.Direction.ASC) Pageable pageable){
 //        Page<Post> categoryPage = postService.findAll(pageable);

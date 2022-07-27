@@ -10,6 +10,7 @@ public interface IUserService {
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
     Users save(Users users);
+    void remove(Long id);
     Optional<Users> findById(Long id);
     Iterable<Users> findAll();
 }
