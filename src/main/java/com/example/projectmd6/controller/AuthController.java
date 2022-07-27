@@ -55,7 +55,7 @@ public class AuthController {
             return new ResponseEntity<>(new ResponMessage("no_email"), HttpStatus.OK);
         }
         if(signUpForm.getAvatar() == null || signUpForm.getAvatar().trim().isEmpty()){
-            signUpForm.setAvatar("https://firebasestorage.googleapis.com/v0/b/chinhbeo-18d3b.appspot.com/o/avatar.png?alt=media&token=3511cf81-8df2-4483-82a8-17becfd03211");
+            signUpForm.setAvatar("https://img.thuthuatphanmem.vn/uploads/2018/09/19/avatar-facebook-chat-13_105604286.jpg");
         }
         Users user = new Users(signUpForm.getName(), signUpForm.getUsername(), signUpForm.getEmail(),signUpForm.getAvatar(),passwordEncoder.encode(signUpForm.getPassword()));
         Set<String> strRoles = signUpForm.getRoles();
