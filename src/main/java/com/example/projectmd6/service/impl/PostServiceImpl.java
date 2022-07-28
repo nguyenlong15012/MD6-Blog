@@ -22,6 +22,11 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    public Page<Post> findAll(Pageable pageable) {
+        return postRepository.findAll(pageable);
+    }
+
+    @Override
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }
@@ -57,9 +62,10 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public Page<Post> findAll(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    public Page<Post> findAllOrderById(Pageable pageable) {
+        return postRepository.findAllOrderById(pageable);
     }
+
 
     @Override
     public Iterable<Post> findAllByTitleContaining(String title) {

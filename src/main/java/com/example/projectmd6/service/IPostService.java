@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface IPostService {
     Iterable<Post> findAll();
+    Page<Post> findAll(Pageable pageable);
 
     Optional<Post> findById(Long id);
 
@@ -26,7 +27,7 @@ public interface IPostService {
 
     Iterable<Post> findAllByStatusPublic();
 
-    Page<Post>findAll(Pageable pageable);
+    Page<Post> findAllOrderById(Pageable pageable);
 
     Iterable<Post> findAllByTitleContaining(String title);
 

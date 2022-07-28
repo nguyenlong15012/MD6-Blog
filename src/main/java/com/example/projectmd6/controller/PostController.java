@@ -38,8 +38,8 @@ public class PostController {
 //        return new ResponseEntity<>(posts, HttpStatus.OK);
 //    }
     @GetMapping
-    public ResponseEntity<?> findAll(@PageableDefault(sort = "id_post", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<Post> postsPage = postService.findAll(pageable);
+    public ResponseEntity<?> findAllPostById(@PageableDefault Pageable pageable){
+        Page<Post> postsPage = postService.findAllOrderById(pageable);
         if(postsPage.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

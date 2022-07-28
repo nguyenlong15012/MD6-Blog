@@ -20,6 +20,10 @@ public interface IPostRepository extends JpaRepository<Post,Long> {
 
 //    List<Post> findByTag_Name(String tagName);
 
+
+    @Query(value = "select * from post order by id_post desc", nativeQuery = true)
+    Page<Post> findAllOrderById(Pageable pageable);
+
     @Modifying
     @Query(value = "select * from post where status = 1 order by id_post desc;", nativeQuery = true)
     Iterable<Post> findAllByStatusPublic();
