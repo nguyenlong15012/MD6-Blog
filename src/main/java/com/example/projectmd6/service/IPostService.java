@@ -26,7 +26,7 @@ public interface IPostService {
 
     Iterable<Post> findAllByStatusPublic();
 
-    Page<Post> findAll(Pageable pageable);
+    Page<Post>findAll(Pageable pageable);
 
     Iterable<Post> findAllByTitleContaining(String title);
 
